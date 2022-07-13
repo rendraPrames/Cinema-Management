@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Schedules</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <script src="https://kit.fontawesome.com/2e9f0c3a28.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-light text-dark">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">BIOSKOP API</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                TEAM D
+            </button>
+        </div>
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/home}">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/films}">Film</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/booking}">Booking</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/schedule}">Schedule</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/usersPage}">User</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/seats}">Seat</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid text-center">
+    <div><h1>Manage Schedules</h1></div>
+    <div class="m-4">
+        <a class="h3 btn btn-dark" th:href="@{/schedule/new}"> <i class="fa-solid fa-circle-plus"></i> ADD New Schedules</a>
+    </div>
+    <div th:if="${message}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+
+    <div class="container-fluid col-md-6 text-center">
+        <form th:action="@{/search}" method="post" class="form-inline mb-3">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="name" th:value="${name}"  placeholder="Find by Film Name">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                    <button type="submit" class="btn btn-success" ><i class="fa-solid fa-arrow-rotate-right"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="container">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+
+            <tr>
+                <th>No</th>
+                <th>Film Name</th>
+                <th>Seat Number</th>
+                <th>Studio Name</th>
+                <th>Seat Status</th>
+                <th>Date Show</th>
+                <th>Show Start</th>
+                <th>Show End</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="schedules, iter : ${schedules}">
+                <tr>
+                    <td th:text="${iter.index + 1}"></td>
+                    <td> [[${schedules.films.name}]] </td>
+                    <td> [[${schedules.seats.seatNumber}]] </td>
+                    <td> [[${schedules.seats.studioName}]] </td>
+                    <td> [[${schedules.seats.isAvailable}]] </td>
+                    <td> [[${schedules.dateShow}]] </td>
+                    <td> [[${schedules.showStart}]] </td>
+                    <td> [[${schedules.showEnd}]] </td>
+                    <td> [[${schedules.price}]] </td>
+                    <td>
+                        <a class="h4 mr-2 btn btn-warning" th:href="@{'/schedule/edit/' + ${schedules.scheduleId}}">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                        <a onclick="myFunction()" class="h4 btn btn-danger" th:href="@{'/schedule/delete/' + ${schedules.scheduleId}}">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--<div th:if="${totalPages > 1}">-->
+<!--    <div class="row col-sm-10">-->
+<!--        <div class="col-sm-2">-->
+<!--            Total Rows: [[${totalItems}]]-->
+<!--        </div>-->
+<!--        <div class="col-sm-1">-->
+<!--            <span th:each="i: ${#numbers.sequence(1, totalPages)}">-->
+<!--      <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>-->
+<!--      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;-->
+<!--            </span>-->
+<!--        </div>-->
+<!--        <div class="col-sm-1">-->
+<!--            <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>-->
+<!--            <span th:unless="${currentPage < totalPages}">Next</span>-->
+<!--        </div>-->
+
+<!--        <div class="col-sm-1">-->
+<!--            <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>-->
+<!--            <span th:unless="${currentPage < totalPages}">Last</span>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<script>
+    function myFunction() {
+        var txt;
+        if (confirm("Anda Yakin Inging Menghapus INI???????")) {
+            txt = "You pressed OK!";
+        } else {
+            txt = "You pressed Cancel!";
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
+</script>
+<script type="script/javascript" th:src="@{/styles/js/popper.js}"></script>
+<script type="script/javascript" th:src="@{/styles/js/jquery.min.js}"></script>
+<script type="script/javascript" th:src="@{/styles/js/main.js}"></script>
+</body>
+</html>

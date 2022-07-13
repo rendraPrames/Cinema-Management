@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SHOW ALL FILMS</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+</head>
+<body style="background: #dcdcdc;" class="text-light">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">BIOSKOP API TEAM D</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/home}">Home</a>
+            <a class="navbar-brand" th:href="@{/films}">Film</a>
+            <a class="navbar-brand" th:href="@{/booking}">Booking</a>
+            <a class="navbar-brand" th:href="@{/schedule}">Schedule</a>
+            <a class="navbar-brand" th:href="@{/usersPage}">User</a>
+            <a class="navbar-brand" th:href="@{/seats}">Seat</a>
+        </div>
+    </div>
+</nav>
+<br/><br/>
+<div class="container my-2">
+    <div  class="text-dark"; align="center"><h1>SHOW ALL FILMS</h1></div>
+          <div class="container-fluid col-md-10 text-center">
+             <div th:if="${message}" class="alert alert-success text-center">
+                 [[${message}]]
+             </div>
+            <div  th:switch="${/films/add}" class="container my-5">
+                 <span style="float: left">
+                        <a href="/films/add" class="btn btn-primary pull-right">
+                                <i class="fas fa-film"> ADD FILM</i>
+                        </a>
+                 </span>
+            </div>
+
+            <div  th:switch="${/films/search}" class="container my-5">
+                <span style="float: right">
+                    <a href="/films/search" class="btn btn-outline-secondary">
+                        <i class="fas fa-play"> Find Playing Film</i>
+                    </a>
+                </span>
+              </div>
+              <br/><br/>
+              <style>
+                .my-custom-scrollbar {
+                position: relative;
+                height: 400px;
+                overflow: auto;
+                }
+                .table-wrapper-scroll-y {
+                display: block;
+                }
+               </style>
+       <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <table class="table table-striped table-light table-responsive-md">
+            <thead class="thead-light">
+            <tr>
+                <th style="width:10%">No</th>
+                <th style="width:10%">Kode</th>
+                <th style="width:50%">Judul Film</th>
+                <th style="width:15%">Status</th>
+                <th style="width:15%">Action</th>
+                 </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="films, iter : ${films}">
+                <tr>
+                    <td scope="row" th:text="${iter.index + 1}"></td>
+                    <td> [[${films.filmId}]] </td>
+                    <td><b> [[${films.name}]] </b></td>
+                    <td> [[${films.isPlaying}]] </td>
+                    <td>
+                        <a th:href="@{'/films/edit/' + ${films.filmId}}"
+                           class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                        <a th:href="@{'/films/delete/' + ${films.filmId}}"
+                           class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+</script>
+</body>
+</html>

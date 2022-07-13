@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+</head>
+<body style="background: #dcdcdc;" class="text-light">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">BIOSKOP API TEAM D</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/home}">Home</a>
+            <a class="navbar-brand" th:href="@{/films}">Film</a>
+            <a class="navbar-brand" th:href="@{/booking}">Booking</a>
+            <a class="navbar-brand" th:href="@{/schedule}">Schedule</a>
+            <a class="navbar-brand" th:href="@{/usersPage}">User</a>
+            <a class="navbar-brand" th:href="@{/seats}">Seat</a>
+        </div>
+    </div>
+</nav>
+<br/><br/>
+<div class="container my-2">
+    <div  class="text-dark"; align="center"><h1>SHOW PLAYING FILMS</h1></div>
+    <div class="container">
+    <br/><br/>
+        <style>
+                .my-custom-scrollbar {
+                position: relative;
+                height: 400px;
+                overflow: auto;
+                }
+                .table-wrapper-scroll-y {
+                display: block;
+                }
+               </style>
+
+        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-striped table-light table-responsive-md">
+                <thead class="thead-light">
+                <tr>
+                    <th style="width:20%">No</th>
+                    <th style="width:20%">Kode</th>
+                    <th style="width:40%">Judul Film</th>
+                    <th style="width:20%">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="films, iter : ${films}">
+                    <tr>
+                        <td scope="row" th:text="${iter.index + 1}"></td>
+                        <td> [[${films.filmId}]] </td>
+                        <td><b> [[${films.name}]] </b></td>
+                        <td> [[${films.isPlaying}]] </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+        <div  th:switch="${/films}" class="container my-5">
+                <span style="float: right">
+                    <a href="/films" class="btn btn-primary">
+                        <i>CANCEL</i>
+                    </a>
+                </span>
+        </div>
+    </div>
+</div>
+</script>
+</body>
+</html>

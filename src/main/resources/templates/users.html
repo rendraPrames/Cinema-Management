@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage Users</title>
+    <link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body style="background: #212529;">
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Bioskop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/films}">
+                    <i class="fa fa-envelope-o">
+                        <span class="badge badge-danger">11</span>
+                    </i>
+                    Film
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/booking}">
+                    <i class="fa fa-envelope-o">
+                        <span class="badge badge-danger">11</span>
+                    </i>
+                    Booking
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/schedule}">
+                    <i class="fa fa-envelope-o">
+                        <span class="badge badge-danger">11</span>
+                    </i>
+                    Schedule
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/users}">
+                    <i class="fa fa-envelope-o">
+                        <span class="badge badge-danger">[[${totalItems}]]</span>
+                    </i>
+                    User
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/seats}">
+                    <i class="fa fa-envelope-o">
+                        <span class="badge badge-danger">11</span>
+                    </i>
+                    Seat
+                </a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<!--End Of NavBar-->
+
+<h2 style=" text-align: center; color: white; padding-top:20px; padding-bottom:20px; padding-left:15px; font-size:40px;">Manage Users</h2>
+<div>
+    <a th:href="@{/newUserForm}">
+        <button type="button" class="button">
+            <span class="button__text">Add User</span>
+            <span class="button__icon">
+        <ion-icon name="person-add-outline"></ion-icon>
+        </span>
+        </button>
+    </a>
+</div>
+
+<div class="container my-2" align="center">
+    <div>
+        <table class="table table-dark table-responsive-md">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="user : ${listUsers}">
+                <tr>
+                    <td> [[${user.userId}]] </td>
+                    <td> [[${user.username}]] </td>
+                    <td> [[${user.emailId}]] </td>
+                    <td> [[${user.password}]] </td>
+                    <td>
+                        <a type="button" class="btn btn-success" th:href="@{/showFormForUpdate/{usersId}(usersId=${user.userId})}">Edit</a>
+                        <a type="button" class="btn btn-danger" style="margin-left:5px" th:href="@{/delete/{usersId}(usersId=${user.userId})}">Delete</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+
+        <div th:if ="${totalPages > 1}">
+            <div class="row col-sm-10">
+                <div class="col-sm-2">
+                    <span>Total Rows: [[${totalItems}]]</span>
+                </div>
+                <div class="col-sm-2">
+                    <span th:each ="i: ${#numbers.sequence(1, totalPages)}">
+                        <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+                        <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                    </span>
+                </div>
+                <div class="col-sm-2">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+                <div class="col-sm-2">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

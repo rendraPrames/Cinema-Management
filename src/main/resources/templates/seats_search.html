@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head style="background:white;">
+    <meta charset="UTF-8">
+    <title>Bioskop Api - Seats Available</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/2e9f0c3a28.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-light text-dark">
+<!--nav bar-->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container">
+        <div class="navbar-header" id="content">
+            <a class="navbar-brand" href="#">BIOSKOP API</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                TEAM D
+            </button>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/home}">Home</a>
+            <a class="navbar-brand" th:href="@{/films}">Film</a>
+            <a class="navbar-brand" th:href="@{/booking}">Booking</a>
+            <a class="navbar-brand" th:href="@{/schedule}">Schedule</a>
+            <a class="navbar-brand" th:href="@{/users}">User</a>
+            <a class="navbar-brand" th:href="@{/seats}">Seat</a>
+        </div>
+    </div>
+</nav>
+<br/><br/>
+<div class="container-fluid" style="text-center">
+    <div class="text-center">
+        <h2>SEATS AVAILABLE</h2>
+    </div>
+    <!-- back -->
+    <div class="container">
+        <a style="float:right;" class="btn btn-outline-secondary" th:href="@{/seats}">BACK</a>
+    </div>
+    <br/><br/>
+    <!--tabel-->
+    <div style="text-center">
+        <table style="max-width: 1120px; margin: 0 auto; " class="text-center align-center table">
+            <thead style="background: black; thead-dark">
+            <tr style="color: white;">
+                <th>No</th>
+                <th>ID</th>
+                <th>Nomor Kursi</th>
+                <th>Nama Studio</th>
+                <th>Status Kursi</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="seats, iter : ${seats}">
+                <tr>
+                    <td th:text="${iter.index + 1}"></td>
+                    <td> [[${seats.seatId}]] </td>
+                    <td> [[${seats.seatNumber}]] </td>
+                    <td> Teater [[${seats.studioName}]] </td>
+                    <td> [[${seats.isAvailable}]] </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

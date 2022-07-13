@@ -1,0 +1,201 @@
+@import 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700';
+@import url('./nav-sidebar.css');
+@import url('./main-content.css');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #f8f9fd;
+}
+
+@media (max-width: 1024px) {
+  .information .card {
+    width: 100%;
+  }
+  #chart-revenue {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    overflow-y: scroll;
+  }
+  .content {
+    padding: 40px 16px;
+    width: fit-content;
+  }
+  .search {
+    width: 250px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .content {
+    margin-left: 0;
+  }
+}
+
+
+.my-custom-scrollbar {
+position: relative;
+height: 400px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+
+*, *:before, *:after {
+	 box-sizing: border-box;
+	 margin: 0;
+	 padding: 0;
+}
+
+ .buttons {
+	 margin-top: 50px;
+	 text-align: center;
+	 border-radius: 30px;
+}
+ .blob-btn {
+	 z-index: 1;
+	 position: relative;
+	 padding: 20px 46px;
+	 margin-bottom: 30px;
+	 text-align: center;
+	 text-transform: uppercase;
+	 color: #0505a9;
+	 font-size: 16px;
+	 font-weight: bold;
+	 background-color: transparent;
+	 outline: none;
+	 border: none;
+	 transition: color 0.5s;
+	 cursor: pointer;
+	 border-radius: 30px;
+}
+ .blob-btn:before {
+	 content: &#34;
+	&#34;
+	;
+	 z-index: 1;
+	 position: absolute;
+	 left: 0;
+	 top: 0;
+	 width: 100%;
+	 height: 100%;
+	 border: 2px solid #0505a9;
+	 border-radius: 30px;
+}
+ .blob-btn:after {
+	 content: &#34;
+	&#34;
+	;
+	 z-index: -2;
+	 position: absolute;
+	 left: 3px;
+	 top: 3px;
+	 width: 100%;
+	 height: 100%;
+	 transition: all 0.3s 0.2s;
+	 border-radius: 30px;
+}
+ .blob-btn:hover {
+	 color: #fff;
+	 border-radius: 30px;
+}
+ .blob-btn:hover:after {
+	 transition: all 0.3s;
+	 left: 0;
+	 top: 0;
+	 border-radius: 30px;
+}
+ .blob-btn__inner {
+	 z-index: -1;
+	 overflow: hidden;
+	 position: absolute;
+	 left: 0;
+	 top: 0;
+	 width: 100%;
+	 height: 100%;
+	 border-radius: 30px;
+	 background: #fff;
+}
+ .blob-btn__blobs {
+	 position: relative;
+	 display: block;
+	 height: 100%;
+	 filter: url(&#39;
+	#goo&#39;
+	);
+}
+ .blob-btn__blob {
+	 position: absolute;
+	 top: 2px;
+	 width: 25%;
+	 height: 100%;
+	 background: #0505a9;
+	 border-radius: 100%;
+	 transform: translate3d(0, 150%, 0) scale(1.7);
+	 transition: transform 0.45s;
+}
+ @supports (filter: url(&#39;
+#goo&#39;
+)) {
+	 transform: translate3d(0, 150%, 0) scale(1.4);
+}
+ .blob-btn__blob:nth-child(1) {
+	 left: 0%;
+	 transition-delay: 0s;
+}
+ .blob-btn__blob:nth-child(2) {
+	 left: 30%;
+	 transition-delay: 0.08s;
+}
+ .blob-btn__blob:nth-child(3) {
+	 left: 60%;
+	 transition-delay: 0.16s;
+}
+ .blob-btn__blob:nth-child(4) {
+	 left: 90%;
+	 transition-delay: 0.24s;
+}
+ .blob-btn:hover .blob-btn__blob {
+	 transform: translateZ(0) scale(1.7);
+}
+ @supports (filter: url(&#39;
+#goo&#39;
+)) {
+	 transform: translateZ(0) scale(1.4);
+}
+
+/*buat button modal */
+        .home .button {
+            float: right;
+            background-color: #96adb7;
+            padding: 10px 24px;
+            display: inline-block;
+            border-radius: 12px;
+            transition: var(--tran-05);
+        }
+        .home .modal .modal-content {
+            background-color: #8fc2cb;
+            color: rgb(248, 248, 248);
+        }
+        .home .button:hover{
+            background-color: #5faebb;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+
+        .sidebar.close ~ .home{
+            left: 78px;
+            height: 100vh;
+            width: calc(100% - 78px);
+        }
+        body.dark .home{
+            background-color: var(--body-color);
+
+        }

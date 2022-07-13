@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${add} ? 'Create A Film' : 'Edit A Film'" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body style="background: #dcdcdc;">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container">
+        <div class="navbar-header" id="content">
+            <a class="navbar-brand" href="#">BIOSKOP API</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                TEAM D
+            </button>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/home}">Home</a>
+            <a class="navbar-brand" th:href="@{/films}">Film</a>
+            <a class="navbar-brand" th:href="@{/booking}">Booking</a>
+            <a class="navbar-brand" th:href="@{/schedule}">Schedule</a>
+            <a class="navbar-brand" th:href="@{/usersPage}">User</a>
+            <a class="navbar-brand" th:href="@{/seats}">Seat</a>
+
+        </div>
+    </div>
+</nav>
+<br/><br/>
+    <div align="center">
+        <div class="container-fluid">
+            <div class="text-center">
+                 <h1 th:text="${add} ? 'Create A Film' : 'Edit A Film'" />
+            </div>
+
+    <br/><br/>
+       <form th:action="${add} ? @{/films/add} : @{/films/edit/{filmId}(filmId=${filmId})}"
+            th:object="${films}" method="POST"
+          style="max-width: 10000px; margin: 0 auto; ">
+           <div class="container my-2">
+                <table border="2" cellpadding="20">
+                    <tr th:if="${filmId}">
+                        <td>ID</td>
+                        <td th:utext="${filmId}">...</td>
+                     </tr>
+                    <tr>
+                        <td><b>Judul</b></td>
+                        <td><input type="text" th:field="*{name}" /></td>
+                    </tr>
+                    <tr>
+                        <td><b>Status</b></td>
+                        <td><input type="number" th:field="*{isPlaying}" /></td>
+                    </tr>
+                </table>
+               <br/><br/>
+               <div>
+                   <tr>Masukkan angka 1 untuk status Film sedang tayang, atau masukkan angka 0 untuk FIlm yang belum tayang</tr>
+               </div>
+           </div>
+       <div class="text-center mt-3">
+            <button type="submit" th:value="${add} ? 'Create' : 'Update'" class="btn btn-primary m-2">Save</button>
+            <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Cancel</button>
+        </div>
+        </form>
+    </div>
+<br/>
+<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />
+</div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location = "[[@{/films}]]"
+    }
+</script>
+</body>
+</html>
